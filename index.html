@@ -4,199 +4,258 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>The Artist’s Table</title>
+<title>The Artist Table</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin:0; padding:0; box-sizing:border-box; }
 
 body {
-    background: #050505;
-    color: #f5f5f0;
-    font-family: 'Cormorant Garamond', serif;
-    overflow-x: hidden;
+    background:#050505;
+    color:#F5F5F0;
+    font-family:'Cormorant Garamond', serif;
+    overflow:hidden;
 }
 
-section {
-    padding: 120px 20px;
-    max-width: 1100px;
-    margin: auto;
+/* ---------- ENVELOPE ---------- */
+
+.envelope-screen {
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:#050505;
+    z-index:100;
+    cursor:pointer;
 }
 
-/* HERO */
-.hero {
-    height: 100vh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.envelope {
+    width:320px;
+    height:200px;
+    background:#0a0a0a;
+    position:relative;
+    border:1px solid rgba(255,255,255,0.05);
+    transition:1.5s;
 }
 
-.hero img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.5);
+.seal {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#d4c5b0,#a69375);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:black;
+    letter-spacing:2px;
 }
 
-.hero-content {
-    position: relative;
-    z-index: 2;
+.envelope.open {
+    transform:scale(1.2);
+    opacity:0;
 }
 
-.hero h1 {
-    font-size: 56px;
-    letter-spacing: 8px;
-    font-weight: 400;
+.touch-text {
+    margin-top:30px;
+    font-family:'Inter',sans-serif;
+    font-size:10px;
+    letter-spacing:6px;
+    opacity:0.3;
 }
 
-.hero p {
-    margin-top: 20px;
-    opacity: 0.7;
-    font-family: 'Inter', sans-serif;
+/* ---------- MAIN ---------- */
+
+.main {
+    opacity:0;
+    transition:2s;
+}
+
+.main.show {
+    opacity:1;
+}
+
+/* ---------- SECTIONS ---------- */
+
+.section {
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:40px;
+}
+
+.text {
+    max-width:800px;
+    line-height:2;
+    font-size:28px;
+    font-weight:300;
+}
+
+.gold {
+    color:#D4C5B0;
+}
+
+/* ---------- IMAGE ---------- */
+
+.image {
+    position:absolute;
+    inset:0;
+    z-index:-1;
+}
+
+.image img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(0.4);
+}
+
+/* ---------- CTA ---------- */
+
+.cta {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
 }
 
 .button {
-    margin-top: 40px;
-    padding: 12px 28px;
-    border: 1px solid #d4c5b0;
-    color: #d4c5b0;
-    text-decoration: none;
-    transition: 0.3s;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 2px;
+    border:1px solid #D4C5B0;
+    padding:14px 30px;
+    letter-spacing:4px;
+    font-size:12px;
+    text-transform:uppercase;
+    transition:0.4s;
+    text-decoration:none;
+    color:#D4C5B0;
 }
 
 .button:hover {
-    background: #d4c5b0;
-    color: black;
+    background:#D4C5B0;
+    color:black;
 }
 
-/* TEXT BLOCK */
-.text-block {
-    text-align: center;
-    max-width: 700px;
-    margin: auto;
-    line-height: 2;
+/* ---------- FORM ---------- */
+
+form {
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    width:280px;
 }
 
-.text-block p {
-    margin-bottom: 20px;
-    opacity: 0.7;
+input, textarea {
+    background:transparent;
+    border:1px solid rgba(255,255,255,0.2);
+    padding:10px;
+    color:white;
+    font-family:'Inter',sans-serif;
 }
 
-/* IMAGE SECTION */
-.image-section {
-    height: 90vh;
-    position: relative;
-}
-
-.image-section img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.6);
-}
-
-/* DIVIDER */
-.divider {
-    height: 1px;
-    background: #222;
-    margin: 80px auto;
-    width: 60%;
-}
-
-/* CTA */
-.cta {
-    text-align: center;
-}
-
-.cta p {
-    margin-bottom: 20px;
-    opacity: 0.6;
-}
-
-/* SMALL TEXT */
-.small {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    letter-spacing: 4px;
-    opacity: 0.4;
-    margin-bottom: 20px;
-}
+textarea { height:80px; }
 
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<section class="hero">
-    <img src="IMAGE1.jpg">
-    <div class="hero-content">
-        <p class="small">BY INVITATION ONLY</p>
-        <h1>THE ARTIST’S TABLE</h1>
-        <p>An intimate intersection of art, conversation and curated experience</p>
-        <a href="#contact" class="button">Request Access</a>
+<!-- ENVELOPE -->
+<div class="envelope-screen" onclick="openEnvelope()">
+    <div class="envelope" id="env">
+        <div class="seal">AT</div>
+    </div>
+    <div class="touch-text">TOUCH TO UNSEAL</div>
+</div>
+
+<!-- MAIN -->
+<div class="main" id="main">
+
+<!-- INTRO -->
+<section class="section">
+    <div class="text">
+        <p>Not another dinner.</p>
+        <p>Not another presentation.</p>
+        <p class="gold">Designed for moments where standard settings are not enough.</p>
     </div>
 </section>
 
-<!-- STORY -->
-<section class="text-block">
-    <p>Not another dinner.</p>
-    <p>Not another presentation.</p>
-    <p style="color:#d4c5b0;">Designed for moments where standard settings are not enough.</p>
-</section>
-
-<div class="divider"></div>
-
-<!-- IMAGE -->
-<section class="image-section">
-    <img src="IMAGE2.jpg">
+<!-- LOCATION -->
+<section class="section">
+    <div class="image">
+        <img src="https://images.unsplash.com/photo-1526481280690-781e9cfc0c98?q=80">
+    </div>
+    <div class="text">
+        <p>Amsterdam.</p>
+        <p>Leidsestraat.</p>
+        <p class="gold">Inside the Metz building.</p>
+        <p>Private. Curated. Controlled.</p>
+    </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section class="text-block">
-    <p>You step inside a historic space.</p>
-    <p>Light falls softly across the room.</p>
-    <p>Champagne is served.</p>
-    <p>The evening unfolds without introduction.</p>
+<section class="section">
+    <div class="text">
+        <p>One artist.</p>
+        <p>One room.</p>
+        <p class="gold">Complete attention.</p>
+        <br>
+        <p>No distractions.</p>
+        <p>No competition.</p>
+        <p>You are inside it.</p>
+    </div>
 </section>
 
-<div class="divider"></div>
-
-<!-- IMAGE -->
-<section class="image-section">
-    <img src="IMAGE3.jpg">
+<!-- FORMATS -->
+<section class="section">
+    <div class="text">
+        <p class="gold">Two formats.</p>
+        <br>
+        <p>The Immersive Salon</p>
+        <p style="opacity:0.6;">Seated. Intimate. Deep.</p>
+        <br>
+        <p>The Social Gallery</p>
+        <p style="opacity:0.6;">Dynamic. Fluid. Curated.</p>
+    </div>
 </section>
-
-<!-- IMMERSION -->
-<section class="text-block">
-    <p>Light tightens. Sound settles.</p>
-    <p>Refined bites are served.</p>
-    <p>You are not watching something unfold.</p>
-    <p style="color:#d4c5b0; font-size:24px;">You are inside it.</p>
-</section>
-
-<div class="divider"></div>
 
 <!-- CTA -->
-<section class="cta" id="contact">
-    <p>Access is limited.</p>
-    <p>Each event is curated per client and location.</p>
+<section class="section">
+    <div class="cta">
+        <p class="gold">Secure your place</p>
 
-    <a href="mailto:your@email.com" class="button">
-        Request Private Access
-    </a>
+        <form action="https://formspree.io/f/your-id" method="POST">
+            <input type="text" name="name" placeholder="Full name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="phone" placeholder="Phone">
+            <textarea name="message" placeholder="Tell us about your event"></textarea>
+            <button class="button">Return to sender</button>
+        </form>
+
+    </div>
 </section>
+
+</div>
+
+<script>
+function openEnvelope() {
+    document.getElementById("env").classList.add("open");
+    setTimeout(()=>{
+        document.querySelector(".envelope-screen").style.display="none";
+        document.getElementById("main").classList.add("show");
+        document.body.style.overflow="auto";
+    },1200);
+}
+</script>
 
 </body>
 </html>
