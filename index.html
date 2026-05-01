@@ -10,7 +10,6 @@
 
 <style>
 
-/* RESET */
 * {margin:0;padding:0;box-sizing:border-box;}
 
 body {
@@ -30,8 +29,7 @@ body::after {
   pointer-events:none;
 }
 
-/* ================= ENVELOPE ================= */
-
+/* ENVELOPE */
 .envelope-stage {
   position:fixed;
   inset:0;
@@ -50,7 +48,6 @@ body::after {
     0 80px 120px rgba(0,0,0,0.9),
     inset 0 0 0 1px rgba(255,255,255,0.04);
   perspective:2000px;
-  cursor:pointer;
 }
 
 /* FLAP */
@@ -67,13 +64,15 @@ body::after {
   justify-content:center;
   flex-direction:column;
   z-index:2;
+
+  /* 🔥 FIX: laat clicks door */
+  pointer-events:none;
 }
 
 .flap.open {
   transform:rotateX(-170deg);
 }
 
-/* TEXT */
 .invite {
   font-family:'Inter';
   font-size:10px;
@@ -88,23 +87,12 @@ body::after {
   margin-top:10px;
 }
 
-/* BOTTOM TEXT */
-.bottom-text {
-  position:absolute;
-  bottom:40px;
-  width:100%;
-  text-align:center;
-  font-size:13px;
-  font-family:'Playfair Display';
-  opacity:0.5;
-}
-
-/* SEAL (REALISTIC GOLD + BREAK) */
+/* SEAL */
 .seal {
   position:absolute;
   top:50%;
   left:50%;
-  transform:translate(-50%,-50%) scale(1);
+  transform:translate(-50%,-50%);
   width:90px;
   height:90px;
   border-radius:50%;
@@ -117,7 +105,8 @@ body::after {
   align-items:center;
   justify-content:center;
   z-index:3;
-  transition:0.5s ease;
+  cursor:pointer;
+  transition:0.4s;
 }
 
 .seal.break {
@@ -128,10 +117,19 @@ body::after {
 .seal span {
   font-weight:bold;
   color:#000;
-  letter-spacing:2px;
 }
 
-/* TOUCH */
+/* TEXT */
+.bottom-text {
+  position:absolute;
+  bottom:40px;
+  width:100%;
+  text-align:center;
+  font-size:13px;
+  font-family:'Playfair Display';
+  opacity:0.5;
+}
+
 .touch {
   margin-top:30px;
   font-size:10px;
@@ -140,8 +138,7 @@ body::after {
   font-family:'Inter';
 }
 
-/* ================= LETTER ================= */
-
+/* LETTER */
 .letter-stage {
   position:fixed;
   inset:0;
@@ -162,16 +159,13 @@ body::after {
   padding:120px 80px;
   min-height:120vh;
   box-shadow:0 60px 120px rgba(0,0,0,0.9);
-  background-image:
-    radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
-  background-size:3px 3px;
 }
 
 /* TEXT */
 .text {
   font-size:30px;
-  line-height:2;
   text-align:center;
+  line-height:2;
 }
 
 .gold {
@@ -180,10 +174,10 @@ body::after {
 
 .sub {
   margin-top:80px;
+  text-align:center;
   font-size:22px;
 }
 
-/* SUBTLE BUTTON */
 .subtle-btn {
   margin-top:80px;
   text-align:center;
@@ -191,20 +185,8 @@ body::after {
   letter-spacing:6px;
   opacity:0.3;
   cursor:pointer;
-  font-family:'Inter';
 }
 
-.subtle-btn::after {
-  content:"";
-  display:block;
-  width:1px;
-  height:40px;
-  background:#D4C5B0;
-  margin:10px auto;
-  opacity:0.3;
-}
-
-/* FORM */
 .form {
   margin-top:60px;
   display:flex;
@@ -221,19 +203,6 @@ input,textarea {
 
 textarea {height:80px;}
 
-/* BACK */
-.back {
-  position:fixed;
-  top:40px;
-  left:40px;
-  font-size:10px;
-  letter-spacing:6px;
-  opacity:0.3;
-  cursor:pointer;
-  font-family:'Inter';
-}
-
-/* POSTED */
 .posted {
   position:fixed;
   inset:0;
@@ -254,14 +223,16 @@ textarea {height:80px;}
 
 <!-- ENVELOPE -->
 <div class="envelope-stage">
-  <div class="envelope" onclick="openEnvelope()">
+
+  <div class="envelope">
 
     <div class="flap" id="flap">
       <div class="invite">BY INVITATION ONLY</div>
       <div class="logo">THE ARTIST TABLE</div>
     </div>
 
-    <div class="seal" id="seal">
+    <!-- 🔥 CLICK HIER -->
+    <div class="seal" id="seal" onclick="openEnvelope(event)">
       <span>AT</span>
     </div>
 
@@ -276,70 +247,69 @@ textarea {height:80px;}
 
 <!-- LETTER -->
 <div class="letter-stage" id="letterStage">
+  <div class="letter">
 
-<div class="back" onclick="goBack()">BACK</div>
+    <div class="text">
+      One artist.<br>
+      One room.<br>
+      <span class="gold">One moment of complete attention</span>
+    </div>
 
-<div class="letter">
+    <div class="sub">
+      Two formats.<br><br>
+      <b>The Immersive Salon</b><br>
+      For intimate seated high-end dining.<br><br>
+      <b>The Social Gallery</b><br>
+      For a dynamic energy.
+    </div>
 
-<div class="text">
-  One artist.<br>
-  One room.<br>
-  <span class="gold">One moment of complete attention</span>
-</div>
+    <div class="subtle-btn" onclick="scrollDown()">READ FURTHER</div>
 
-<div class="sub">
-  Two formats.<br><br>
+    <div style="margin-top:300px;text-align:center;font-size:22px;">
+      Secure your seat
 
-  <b>The Immersive Salon</b><br>
-  For intimate seated high-end dining.<br><br>
+      <div class="form">
+        <input placeholder="Company">
+        <input placeholder="Email">
+        <input placeholder="Phone">
+        <textarea placeholder="Message"></textarea>
 
-  <b>The Social Gallery</b><br>
-  For a dynamic energy.
-</div>
+        <div class="subtle-btn" onclick="submitForm()">RETURN TO SENDER</div>
+      </div>
+    </div>
 
-<div class="subtle-btn" onclick="scrollDown()">READ FURTHER</div>
-
-<div style="margin-top:300px;text-align:center;font-size:22px;">
-  A private floor inside the Metz building.<br>
-  Leidsestraat 32–34 in Amsterdam.<br>
-  <span class="gold">Secure your seat</span>
-
-  <div class="form">
-    <input placeholder="Company">
-    <input placeholder="Email">
-    <input placeholder="Phone">
-    <textarea placeholder="Message"></textarea>
-
-    <div class="subtle-btn" onclick="submitForm()">RETURN TO SENDER</div>
   </div>
-</div>
-
-</div>
 </div>
 
 <div class="posted" id="posted">POSTED</div>
 
 <script>
 
-function openEnvelope(){
+let opened = false;
+
+function openEnvelope(e){
+  e.stopPropagation();
+
+  if(opened) return;
+  opened = true;
 
   const seal = document.getElementById("seal");
   const flap = document.getElementById("flap");
   const sound = document.getElementById("sealSound");
 
-  // SOUND
+  // SOUND SAFE PLAY
   sound.volume = 0.4;
-  sound.play();
+  sound.play().catch(()=>{});
 
   // SEAL BREAK
   seal.classList.add("break");
 
-  // DELAY → flap opens
+  // FLAP OPEN
   setTimeout(()=>{
     flap.classList.add("open");
-  },400);
+  },300);
 
-  // TRANSITION TO LETTER
+  // SHOW LETTER
   setTimeout(()=>{
     document.querySelector(".envelope-stage").style.display="none";
     document.getElementById("letterStage").classList.add("show");
@@ -349,10 +319,6 @@ function openEnvelope(){
 
 function scrollDown(){
   window.scrollBy({top:window.innerHeight,behavior:"smooth"});
-}
-
-function goBack(){
-  location.reload();
 }
 
 function submitForm(){
