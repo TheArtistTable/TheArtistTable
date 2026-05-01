@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Artist's Table</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: #0c0c0c;
+    color: #f5f5f5;
+    line-height: 1.6;
+}
+
+section {
+    padding: 80px 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+h1, h2, h3 {
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 42px;
+}
+
+h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #cfcfcf;
+}
+
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.button {
+    margin-top: 30px;
+    padding: 12px 28px;
+    border: 1px solid #fff;
+    background: transparent;
+    color: #fff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.button:hover {
+    background: #fff;
+    color: #000;
+}
+
+.divider {
+    border-top: 1px solid #333;
+    margin: 60px 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+@media(min-width: 768px){
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.small {
+    font-size: 14px;
+    color: #999;
+}
+</style>
+
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <div>
+        <p class="small">BY INVITATION ONLY</p>
+        <h1>THE ARTIST’S TABLE</h1>
+        <p>An intimate intersection of art, conversation and curated experience.</p>
+        <a href="#contact" class="button">Request Access</a>
+    </div>
+</section>
+
+<!-- CONCEPT -->
+<section>
+    <h2>The Concept</h2>
+    <p>
+        A carefully curated evening where art is not observed, but experienced.
+        Where guests don’t attend — they belong.
+    </p>
+    <p>
+        Each edition is designed around atmosphere, intimacy and meaningful connection.
+    </p>
+</section>
+
+<div class="divider"></div>
+
+<!-- FORMATS -->
+<section>
+    <h2>The Formats</h2>
+
+    <div class="grid">
+        <div>
+            <h3>The Immersive Salon</h3>
+            <p class="small">Seated. Intimate. Layered.</p>
+            <p>12–60 guests. Dining experience. Deep conversation. Story-driven.</p>
+        </div>
+
+        <div>
+            <h3>The Social Gallery</h3>
+            <p class="small">Standing. Fluid. Social.</p>
+            <p>20–80 guests. Networking. Art experience. Dynamic flow.</p>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section>
+    <h2>The Experience</h2>
+
+    <p><strong>Arrival</strong><br>A quiet entrance. A first impression that lingers.</p>
+
+    <p><strong>The Moment</strong><br>Conversations begin. Energy builds slowly.</p>
+
+    <p><strong>The Artist</strong><br>A story that reshapes perspective.</p>
+
+    <p><strong>The Shift</strong><br>From observation to interaction.</p>
+
+    <p><strong>After Flow</strong><br>Where connections become real.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDITIONS -->
+<section>
+    <h2>Editions</h2>
+
+    <p><strong>Essential</strong><br>Refined simplicity.</p>
+
+    <p><strong>Refined</strong><br>Elevated culinary and atmosphere experience.</p>
+
+    <p><strong>Signature</strong><br>A fully orchestrated, world-class evening.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section id="contact">
+    <h2>Request Access</h2>
+    <p>
+        Access is limited. Each event is curated per client and location.
+    </p>
+
+    <a href="mailto:your@email.com" class="button">
+        Apply for a Private Edition
+    </a>
+</section>
+
+</body>
+</html>
