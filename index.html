@@ -3,174 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Artist's Table</title>
+
+<title>The Artist’s Table</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-body {
+
+* {
     margin: 0;
-    font-family: 'Georgia', serif;
-    background-color: #0c0c0c;
-    color: #f5f5f5;
-    line-height: 1.6;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #050505;
+    color: #f5f5f0;
+    font-family: 'Cormorant Garamond', serif;
+    overflow-x: hidden;
 }
 
 section {
-    padding: 80px 20px;
-    max-width: 900px;
+    padding: 120px 20px;
+    max-width: 1100px;
     margin: auto;
 }
 
-h1, h2, h3 {
-    font-weight: 400;
-    letter-spacing: 1px;
-}
-
-h1 {
-    font-size: 42px;
-}
-
-h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-}
-
-p {
-    color: #cfcfcf;
-}
-
+/* HERO */
 .hero {
     height: 100vh;
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
+.hero img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero h1 {
+    font-size: 56px;
+    letter-spacing: 8px;
+    font-weight: 400;
+}
+
+.hero p {
+    margin-top: 20px;
+    opacity: 0.7;
+    font-family: 'Inter', sans-serif;
+}
+
 .button {
-    margin-top: 30px;
+    margin-top: 40px;
     padding: 12px 28px;
-    border: 1px solid #fff;
-    background: transparent;
-    color: #fff;
+    border: 1px solid #d4c5b0;
+    color: #d4c5b0;
     text-decoration: none;
     transition: 0.3s;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 2px;
 }
 
 .button:hover {
-    background: #fff;
-    color: #000;
+    background: #d4c5b0;
+    color: black;
 }
 
+/* TEXT BLOCK */
+.text-block {
+    text-align: center;
+    max-width: 700px;
+    margin: auto;
+    line-height: 2;
+}
+
+.text-block p {
+    margin-bottom: 20px;
+    opacity: 0.7;
+}
+
+/* IMAGE SECTION */
+.image-section {
+    height: 90vh;
+    position: relative;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.6);
+}
+
+/* DIVIDER */
 .divider {
-    border-top: 1px solid #333;
-    margin: 60px 0;
+    height: 1px;
+    background: #222;
+    margin: 80px auto;
+    width: 60%;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
+/* CTA */
+.cta {
+    text-align: center;
 }
 
-@media(min-width: 768px){
-    .grid {
-        grid-template-columns: 1fr 1fr;
-    }
+.cta p {
+    margin-bottom: 20px;
+    opacity: 0.6;
 }
 
+/* SMALL TEXT */
 .small {
-    font-size: 14px;
-    color: #999;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    letter-spacing: 4px;
+    opacity: 0.4;
+    margin-bottom: 20px;
 }
-</style>
 
+</style>
 </head>
+
 <body>
 
 <!-- HERO -->
 <section class="hero">
-    <div>
+    <img src="IMAGE1.jpg">
+    <div class="hero-content">
         <p class="small">BY INVITATION ONLY</p>
         <h1>THE ARTIST’S TABLE</h1>
-        <p>An intimate intersection of art, conversation and curated experience.</p>
+        <p>An intimate intersection of art, conversation and curated experience</p>
         <a href="#contact" class="button">Request Access</a>
     </div>
 </section>
 
-<!-- CONCEPT -->
-<section>
-    <h2>The Concept</h2>
-    <p>
-        A carefully curated evening where art is not observed, but experienced.
-        Where guests don’t attend — they belong.
-    </p>
-    <p>
-        Each edition is designed around atmosphere, intimacy and meaningful connection.
-    </p>
+<!-- STORY -->
+<section class="text-block">
+    <p>Not another dinner.</p>
+    <p>Not another presentation.</p>
+    <p style="color:#d4c5b0;">Designed for moments where standard settings are not enough.</p>
 </section>
 
 <div class="divider"></div>
 
-<!-- FORMATS -->
-<section>
-    <h2>The Formats</h2>
-
-    <div class="grid">
-        <div>
-            <h3>The Immersive Salon</h3>
-            <p class="small">Seated. Intimate. Layered.</p>
-            <p>12–60 guests. Dining experience. Deep conversation. Story-driven.</p>
-        </div>
-
-        <div>
-            <h3>The Social Gallery</h3>
-            <p class="small">Standing. Fluid. Social.</p>
-            <p>20–80 guests. Networking. Art experience. Dynamic flow.</p>
-        </div>
-    </div>
+<!-- IMAGE -->
+<section class="image-section">
+    <img src="IMAGE2.jpg">
 </section>
-
-<div class="divider"></div>
 
 <!-- EXPERIENCE -->
-<section>
-    <h2>The Experience</h2>
-
-    <p><strong>Arrival</strong><br>A quiet entrance. A first impression that lingers.</p>
-
-    <p><strong>The Moment</strong><br>Conversations begin. Energy builds slowly.</p>
-
-    <p><strong>The Artist</strong><br>A story that reshapes perspective.</p>
-
-    <p><strong>The Shift</strong><br>From observation to interaction.</p>
-
-    <p><strong>After Flow</strong><br>Where connections become real.</p>
+<section class="text-block">
+    <p>You step inside a historic space.</p>
+    <p>Light falls softly across the room.</p>
+    <p>Champagne is served.</p>
+    <p>The evening unfolds without introduction.</p>
 </section>
 
 <div class="divider"></div>
 
-<!-- EDITIONS -->
-<section>
-    <h2>Editions</h2>
+<!-- IMAGE -->
+<section class="image-section">
+    <img src="IMAGE3.jpg">
+</section>
 
-    <p><strong>Essential</strong><br>Refined simplicity.</p>
-
-    <p><strong>Refined</strong><br>Elevated culinary and atmosphere experience.</p>
-
-    <p><strong>Signature</strong><br>A fully orchestrated, world-class evening.</p>
+<!-- IMMERSION -->
+<section class="text-block">
+    <p>Light tightens. Sound settles.</p>
+    <p>Refined bites are served.</p>
+    <p>You are not watching something unfold.</p>
+    <p style="color:#d4c5b0; font-size:24px;">You are inside it.</p>
 </section>
 
 <div class="divider"></div>
 
 <!-- CTA -->
-<section id="contact">
-    <h2>Request Access</h2>
-    <p>
-        Access is limited. Each event is curated per client and location.
-    </p>
+<section class="cta" id="contact">
+    <p>Access is limited.</p>
+    <p>Each event is curated per client and location.</p>
 
     <a href="mailto:your@email.com" class="button">
-        Apply for a Private Edition
+        Request Private Access
     </a>
 </section>
 
