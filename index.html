@@ -3,258 +3,293 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>The Artist Table</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
 
-* { margin:0; padding:0; box-sizing:border-box; }
-
+* {margin:0;padding:0;box-sizing:border-box;}
 body {
-    background:#050505;
-    color:#F5F5F0;
-    font-family:'Cormorant Garamond', serif;
-    overflow:hidden;
+  background:#050505;
+  color:#F5F5F0;
+  font-family:'Cormorant Garamond', serif;
+  overflow:hidden;
 }
 
-/* ---------- ENVELOPE ---------- */
+/* GRAIN */
+body::after {
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity:0.05;
+  pointer-events:none;
+}
 
-.envelope-screen {
-    position:fixed;
-    inset:0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    background:#050505;
-    z-index:100;
-    cursor:pointer;
+/* ENVELOPE */
+.envelope-wrap {
+  position:fixed;
+  inset:0;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  cursor:pointer;
+  z-index:10;
 }
 
 .envelope {
-    width:320px;
-    height:200px;
-    background:#0a0a0a;
-    position:relative;
-    border:1px solid rgba(255,255,255,0.05);
-    transition:1.5s;
+  width:520px;
+  height:320px;
+  background:#0a0a0a;
+  position:relative;
+  border:1px solid rgba(255,255,255,0.05);
+  perspective:1000px;
 }
 
+/* FLAP */
+.flap {
+  position:absolute;
+  top:0;
+  width:100%;
+  height:50%;
+  background:#0d0d0d;
+  transform-origin:top;
+  transition:1.2s ease;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.invite {
+  font-size:10px;
+  letter-spacing:6px;
+  opacity:0.4;
+  font-family:'Inter';
+}
+
+.logo {
+  margin-top:10px;
+  letter-spacing:6px;
+  font-size:16px;
+}
+
+/* BODY */
+.body {
+  position:absolute;
+  bottom:0;
+  height:50%;
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:20px;
+}
+
+.tagline {
+  font-size:12px;
+  opacity:0.5;
+  font-family:'Inter';
+}
+
+/* SEAL */
 .seal {
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    width:60px;
-    height:60px;
-    border-radius:50%;
-    background:linear-gradient(145deg,#d4c5b0,#a69375);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:12px;
-    color:black;
-    letter-spacing:2px;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:radial-gradient(circle,#d4c5b0,#a69375);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:bold;
+  color:black;
+  box-shadow:0 0 40px rgba(212,197,176,0.3);
 }
 
-.envelope.open {
-    transform:scale(1.2);
-    opacity:0;
+.touch {
+  margin-top:30px;
+  font-size:10px;
+  letter-spacing:6px;
+  opacity:0.3;
+  font-family:'Inter';
 }
 
-.touch-text {
-    margin-top:30px;
-    font-family:'Inter',sans-serif;
-    font-size:10px;
-    letter-spacing:6px;
-    opacity:0.3;
+/* LETTER */
+.letter {
+  position:fixed;
+  inset:0;
+  background:#050505;
+  opacity:0;
+  transform:translateY(40px);
+  transition:1.5s;
+  overflow:auto;
 }
 
-/* ---------- MAIN ---------- */
-
-.main {
-    opacity:0;
-    transition:2s;
+.letter.show {
+  opacity:1;
+  transform:translateY(0);
 }
-
-.main.show {
-    opacity:1;
-}
-
-/* ---------- SECTIONS ---------- */
 
 .section {
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:40px;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:40px;
 }
 
 .text {
-    max-width:800px;
-    line-height:2;
-    font-size:28px;
-    font-weight:300;
+  max-width:700px;
+  font-size:28px;
+  line-height:2;
 }
 
-.gold {
-    color:#D4C5B0;
+.gold {color:#D4C5B0;}
+
+button {
+  margin-top:40px;
+  background:none;
+  border:1px solid #D4C5B0;
+  color:#D4C5B0;
+  padding:12px 28px;
+  letter-spacing:4px;
+  cursor:pointer;
+  transition:0.4s;
 }
 
-/* ---------- IMAGE ---------- */
-
-.image {
-    position:absolute;
-    inset:0;
-    z-index:-1;
+button:hover {
+  background:#D4C5B0;
+  color:black;
 }
 
-.image img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    filter:brightness(0.4);
-}
-
-/* ---------- CTA ---------- */
-
-.cta {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:20px;
-}
-
-.button {
-    border:1px solid #D4C5B0;
-    padding:14px 30px;
-    letter-spacing:4px;
-    font-size:12px;
-    text-transform:uppercase;
-    transition:0.4s;
-    text-decoration:none;
-    color:#D4C5B0;
-}
-
-.button:hover {
-    background:#D4C5B0;
-    color:black;
-}
-
-/* ---------- FORM ---------- */
-
+/* FORM */
 form {
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    width:280px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:260px;
 }
 
-input, textarea {
-    background:transparent;
-    border:1px solid rgba(255,255,255,0.2);
-    padding:10px;
-    color:white;
-    font-family:'Inter',sans-serif;
+input,textarea {
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.2);
+  padding:10px;
+  color:white;
 }
 
-textarea { height:80px; }
+textarea {height:80px;}
+
+.back-btn {
+  position:fixed;
+  top:30px;
+  left:30px;
+  font-size:10px;
+  letter-spacing:4px;
+  opacity:0.3;
+  cursor:pointer;
+  font-family:'Inter';
+}
 
 </style>
 </head>
 
 <body>
 
-<!-- ENVELOPE -->
-<div class="envelope-screen" onclick="openEnvelope()">
-    <div class="envelope" id="env">
-        <div class="seal">AT</div>
+<div class="envelope-wrap" onclick="openEnvelope()">
+  <div class="envelope">
+    <div class="flap">
+      <div class="invite">BY INVITATION ONLY</div>
+      <div class="logo">THE ARTIST TABLE</div>
     </div>
-    <div class="touch-text">TOUCH TO UNSEAL</div>
+    <div class="body">
+      <div class="tagline">
+        A curated art experience, designed for moments where standard settings are not enough
+      </div>
+    </div>
+    <div class="seal">AT</div>
+  </div>
+  <div class="touch">TOUCH TO UNSEAL</div>
 </div>
 
-<!-- MAIN -->
-<div class="main" id="main">
+<div class="letter" id="letter">
 
-<!-- INTRO -->
+<div class="back-btn" onclick="goBack()">BACK</div>
+
 <section class="section">
-    <div class="text">
-        <p>Not another dinner.</p>
-        <p>Not another presentation.</p>
-        <p class="gold">Designed for moments where standard settings are not enough.</p>
-    </div>
+  <div class="text">
+    <p>One artist.</p>
+    <p>One room.</p>
+    <p class="gold">One moment of complete attention.</p>
+    <br>
+    <p>No distractions.</p>
+    <p>No noise.</p>
+    <p>No competition.</p>
+    <p class="gold">Only presence.</p>
+    <button onclick="scrollNext()">READ FURTHER</button>
+  </div>
 </section>
 
-<!-- LOCATION -->
 <section class="section">
-    <div class="image">
-        <img src="https://images.unsplash.com/photo-1526481280690-781e9cfc0c98?q=80">
-    </div>
-    <div class="text">
-        <p>Amsterdam.</p>
-        <p>Leidsestraat.</p>
-        <p class="gold">Inside the Metz building.</p>
-        <p>Private. Curated. Controlled.</p>
-    </div>
+  <div class="text">
+    <p class="gold">Two formats.</p>
+    <br>
+    <p>The Immersive Salon</p>
+    <p style="opacity:0.6;">Seated. Intimate. Deep.</p>
+    <br>
+    <p>The Social Gallery</p>
+    <p style="opacity:0.6;">Dynamic. Curated.</p>
+    <br><br>
+    <p>Amsterdam. Leidsestraat.</p>
+    <p class="gold">Inside the Metz building.</p>
+    <p>Not open to the public.</p>
+    <button onclick="scrollNext()">CONTINUE</button>
+  </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section class="section">
-    <div class="text">
-        <p>One artist.</p>
-        <p>One room.</p>
-        <p class="gold">Complete attention.</p>
-        <br>
-        <p>No distractions.</p>
-        <p>No competition.</p>
-        <p>You are inside it.</p>
-    </div>
-</section>
+  <div class="text">
+    <p class="gold">Secure your place</p>
 
-<!-- FORMATS -->
-<section class="section">
-    <div class="text">
-        <p class="gold">Two formats.</p>
-        <br>
-        <p>The Immersive Salon</p>
-        <p style="opacity:0.6;">Seated. Intimate. Deep.</p>
-        <br>
-        <p>The Social Gallery</p>
-        <p style="opacity:0.6;">Dynamic. Fluid. Curated.</p>
-    </div>
-</section>
+    <form action="https://formspree.io/f/your-id" method="POST">
+      <input name="company" placeholder="Company">
+      <input name="email" placeholder="Email">
+      <input name="phone" placeholder="Phone">
+      <textarea name="message" placeholder="Message"></textarea>
+      <button>Return to sender</button>
+    </form>
 
-<!-- CTA -->
-<section class="section">
-    <div class="cta">
-        <p class="gold">Secure your place</p>
-
-        <form action="https://formspree.io/f/your-id" method="POST">
-            <input type="text" name="name" placeholder="Full name" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="tel" name="phone" placeholder="Phone">
-            <textarea name="message" placeholder="Tell us about your event"></textarea>
-            <button class="button">Return to sender</button>
-        </form>
-
-    </div>
+  </div>
 </section>
 
 </div>
 
 <script>
-function openEnvelope() {
-    document.getElementById("env").classList.add("open");
-    setTimeout(()=>{
-        document.querySelector(".envelope-screen").style.display="none";
-        document.getElementById("main").classList.add("show");
-        document.body.style.overflow="auto";
-    },1200);
+
+function openEnvelope(){
+  document.querySelector(".flap").style.transform = "rotateX(-140deg)";
+  setTimeout(()=>{
+    document.querySelector(".envelope-wrap").style.display="none";
+    document.getElementById("letter").classList.add("show");
+    document.body.style.overflow="auto";
+  },800);
 }
+
+function scrollNext(){
+  window.scrollBy({top:window.innerHeight, behavior:"smooth"});
+}
+
+function goBack(){
+  location.reload();
+}
+
 </script>
 
 </body>
