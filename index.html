@@ -30,7 +30,7 @@ body::after {
 }
 
 /* ENVELOPE */
-.envelope-stage {
+.stage {
   position:fixed;
   inset:0;
   display:flex;
@@ -42,12 +42,10 @@ body::after {
 .envelope {
   width:720px;
   height:440px;
-  background:linear-gradient(#0b0b0b,#070707);
+  background:#0a0a0a;
   position:relative;
-  box-shadow:
-    0 80px 120px rgba(0,0,0,0.9),
-    inset 0 0 0 1px rgba(255,255,255,0.04);
-  perspective:2000px;
+  box-shadow:0 80px 120px rgba(0,0,0,0.9);
+  cursor:pointer;
 }
 
 /* FLAP */
@@ -56,16 +54,15 @@ body::after {
   top:0;
   width:100%;
   height:52%;
-  background:linear-gradient(#0e0e0e,#0a0a0a);
+  background:#0e0e0e;
   transform-origin:top;
   transition:1.6s cubic-bezier(.23,1,.32,1);
   display:flex;
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  z-index:2;
 
-  /* 🔥 FIX: laat clicks door */
+  /* 🔥 KEY FIX */
   pointer-events:none;
 }
 
@@ -73,6 +70,7 @@ body::after {
   transform:rotateX(-170deg);
 }
 
+/* TEXT */
 .invite {
   font-family:'Inter';
   font-size:10px;
@@ -97,16 +95,15 @@ body::after {
   height:90px;
   border-radius:50%;
   background:radial-gradient(circle at 30% 30%,#f5e7c8,#d4c5b0,#a69375);
-  box-shadow:
-    inset 0 4px 8px rgba(255,255,255,0.2),
-    inset 0 -8px 16px rgba(0,0,0,0.6),
-    0 0 40px rgba(212,197,176,0.3);
   display:flex;
   align-items:center;
   justify-content:center;
   z-index:3;
-  cursor:pointer;
-  transition:0.4s;
+}
+
+.seal span {
+  color:#000;
+  font-weight:bold;
 }
 
 .seal.break {
@@ -114,28 +111,22 @@ body::after {
   opacity:0;
 }
 
-.seal span {
-  font-weight:bold;
-  color:#000;
-}
-
-/* TEXT */
+/* BOTTOM TEXT */
 .bottom-text {
   position:absolute;
   bottom:40px;
   width:100%;
   text-align:center;
   font-size:13px;
-  font-family:'Playfair Display';
   opacity:0.5;
 }
 
+/* TOUCH */
 .touch {
   margin-top:30px;
   font-size:10px;
   letter-spacing:6px;
   opacity:0.3;
-  font-family:'Inter';
 }
 
 /* LETTER */
@@ -143,66 +134,21 @@ body::after {
   position:fixed;
   inset:0;
   opacity:0;
-  transform:translateY(80px);
-  transition:1.6s;
+  transition:1.2s;
 }
 
 .letter-stage.show {
   opacity:1;
-  transform:translateY(0);
 }
 
 .letter {
   width:700px;
   margin:auto;
-  background:#060606;
-  padding:120px 80px;
-  min-height:120vh;
-  box-shadow:0 60px 120px rgba(0,0,0,0.9);
-}
-
-/* TEXT */
-.text {
-  font-size:30px;
+  padding:120px;
   text-align:center;
-  line-height:2;
 }
 
-.gold {
-  color:#D4C5B0;
-}
-
-.sub {
-  margin-top:80px;
-  text-align:center;
-  font-size:22px;
-}
-
-.subtle-btn {
-  margin-top:80px;
-  text-align:center;
-  font-size:11px;
-  letter-spacing:6px;
-  opacity:0.3;
-  cursor:pointer;
-}
-
-.form {
-  margin-top:60px;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-input,textarea {
-  background:none;
-  border:1px solid rgba(255,255,255,0.2);
-  padding:10px;
-  color:white;
-}
-
-textarea {height:80px;}
-
+/* POSTED */
 .posted {
   position:fixed;
   inset:0;
@@ -210,7 +156,6 @@ textarea {height:80px;}
   align-items:center;
   justify-content:center;
   font-size:30px;
-  letter-spacing:10px;
   opacity:0.2;
 }
 
@@ -219,20 +164,18 @@ textarea {height:80px;}
 
 <body>
 
-<audio id="sealSound" src="https://assets.mixkit.co/sfx/preview/mixkit-paper-rip-998.mp3"></audio>
+<audio id="sound" src="https://assets.mixkit.co/sfx/preview/mixkit-paper-rip-998.mp3"></audio>
 
-<!-- ENVELOPE -->
-<div class="envelope-stage">
+<div class="stage">
 
-  <div class="envelope">
+  <div class="envelope" id="envelope">
 
     <div class="flap" id="flap">
       <div class="invite">BY INVITATION ONLY</div>
       <div class="logo">THE ARTIST TABLE</div>
     </div>
 
-    <!-- 🔥 CLICK HIER -->
-    <div class="seal" id="seal" onclick="openEnvelope(event)">
+    <div class="seal" id="seal">
       <span>AT</span>
     </div>
 
@@ -243,41 +186,12 @@ textarea {height:80px;}
   </div>
 
   <div class="touch">TOUCH TO UNSEAL</div>
+
 </div>
 
-<!-- LETTER -->
 <div class="letter-stage" id="letterStage">
   <div class="letter">
-
-    <div class="text">
-      One artist.<br>
-      One room.<br>
-      <span class="gold">One moment of complete attention</span>
-    </div>
-
-    <div class="sub">
-      Two formats.<br><br>
-      <b>The Immersive Salon</b><br>
-      For intimate seated high-end dining.<br><br>
-      <b>The Social Gallery</b><br>
-      For a dynamic energy.
-    </div>
-
-    <div class="subtle-btn" onclick="scrollDown()">READ FURTHER</div>
-
-    <div style="margin-top:300px;text-align:center;font-size:22px;">
-      Secure your seat
-
-      <div class="form">
-        <input placeholder="Company">
-        <input placeholder="Email">
-        <input placeholder="Phone">
-        <textarea placeholder="Message"></textarea>
-
-        <div class="subtle-btn" onclick="submitForm()">RETURN TO SENDER</div>
-      </div>
-    </div>
-
+    <h1>One artist. One room.</h1>
   </div>
 </div>
 
@@ -287,17 +201,18 @@ textarea {height:80px;}
 
 let opened = false;
 
-function openEnvelope(e){
-  e.stopPropagation();
+document.getElementById("envelope").addEventListener("click", openEnvelope);
+
+function openEnvelope(){
 
   if(opened) return;
   opened = true;
 
   const seal = document.getElementById("seal");
   const flap = document.getElementById("flap");
-  const sound = document.getElementById("sealSound");
+  const sound = document.getElementById("sound");
 
-  // SOUND SAFE PLAY
+  // SOUND (veilig)
   sound.volume = 0.4;
   sound.play().catch(()=>{});
 
@@ -311,19 +226,10 @@ function openEnvelope(e){
 
   // SHOW LETTER
   setTimeout(()=>{
-    document.querySelector(".envelope-stage").style.display="none";
+    document.querySelector(".stage").style.display="none";
     document.getElementById("letterStage").classList.add("show");
-    document.body.style.overflow="auto";
   },1400);
-}
 
-function scrollDown(){
-  window.scrollBy({top:window.innerHeight,behavior:"smooth"});
-}
-
-function submitForm(){
-  document.getElementById("letterStage").style.display="none";
-  document.getElementById("posted").style.display="flex";
 }
 
 </script>
